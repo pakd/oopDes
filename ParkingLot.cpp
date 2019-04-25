@@ -264,7 +264,29 @@ int main()
 {
     MotorCycle MotorCycleObject("KA05JX0297");
 
-    // write sample case
-    ParkingSpot *spot1 = &ParkingLot::getInstance->placeVehicle(MotorCycleObject);
+    // Park motorcycle
+    ParkingSpot *spot1 = ParkingLot::getInstance()->placeVehicle(MotorCycleObject);
+    cout << spot1->getSpotId() << endl;
+    cout << spot1->getSpotSize() << endl;
+
+
+    Car CarObject("DL03B7822");
+
+    // Park car1
+    ParkingSpot *spot2 = ParkingLot::getInstance()->placeVehicle(CarObject);
+    cout << spot2->getSpotId() << endl;
+    cout << spot2->getSpotSize() << endl;
+
+    Car CarObject2("UP04J0007");
+
+    // Par car2
+    ParkingSpot *spot3 = ParkingLot::getInstance()->placeVehicle(CarObject2);
+    cout << spot3->getSpotId() << endl;
+    cout << spot3->getSpotSize() << endl;
+
+    // remove car1
+    ParkingSpot *spot4 = ParkingLot::getInstance()->removeVehicle(CarObject);
+    cout << spot4->getSpotId() << endl;
+    cout << spot4->getSpotSize() << endl;
     return 0;
 }
