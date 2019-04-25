@@ -30,13 +30,9 @@ public:
         cout << "ctor of Vehicle class" << endl;
         mLicensePlate = licensePlate;
         mSize = size;
-
-        //cout << mSize << endl;
-        //cout << mLicensePlate << endl;
     }
 
     // make all getter functions for private members
-
     string getLicensePlate()
     {
         return mLicensePlate;
@@ -114,6 +110,7 @@ private:
     SpotSize mSize;
 
 };
+
 //------------------------------------------------------------------------------------------
 // We have to initialize all the spots once, so it is ok to have Singleton class
 // or singleton pattern
@@ -132,9 +129,9 @@ public:
     }
 
 
-    ParkingSpot* placeVehicle(Vehicle vehicle)
+    ParkingSpot* placeVehicle(Vehicle *vehicle)
     {
-        VehicleSize vehicleSize = vehicle.getVehicleSize();
+        VehicleSize vehicleSize = vehicle->getVehicleSize();
 
         ParkingSpot *ptrParkingSpot;
         switch(vehicleSize)
@@ -146,7 +143,7 @@ public:
                 ptrParkingSpot = &mSmallSpotList.top();
                 mSmallSpotList.pop();
                 //mParkedVehicle[&vehicle] = ptrParkingSpot;
-                mParkedVehicle.insert({&vehicle, ptrParkingSpot});
+                mParkedVehicle.insert({vehicle, ptrParkingSpot});
             }
             break;
 
@@ -156,7 +153,7 @@ public:
             {
                 ptrParkingSpot = &mMediumSpotList.top();
                 mMediumSpotList.pop();
-                mParkedVehicle.insert({&vehicle, ptrParkingSpot});
+                mParkedVehicle.insert({vehicle, ptrParkingSpot});
             }
             break;
 
@@ -165,7 +162,7 @@ public:
                 {
                     ptrParkingSpot = &mLargeSpotList.top();
                     mLargeSpotList.pop();
-                    mParkedVehicle.insert({&vehicle, ptrParkingSpot});
+                    mParkedVehicle.insert({vehicle, ptrParkingSpot});
                 }
                 break;
         }
@@ -175,13 +172,13 @@ public:
         return ptrParkingSpot;
     }
 
-    ParkingSpot* removeVehicle(Vehicle vehicle)
+    ParkingSpot* removeVehicle(Vehicle *vehicle)
     {
-        if(mParkedVehicle.find(&vehicle) != mParkedVehicle.end())
+        if(mParkedVehicle.find(vehicle) != mParkedVehicle.end())
         {
-            ParkingSpot *ptrParkingSpot = mParkedVehicle[&vehicle];
+            ParkingSpot *ptrParkingSpot = mParkedVehicle[vehicle];
 
-            VehicleSize vehicleSize = vehicle.getVehicleSize();
+            VehicleSize vehicleSize = vehicle->getVehicleSize();
 
             switch(vehicleSize)
             {
@@ -201,6 +198,10 @@ public:
 
             }
 
+            // remove from map
+            auto it = mParkedVehicle.find(vehicle);
+            mParkedVehicle.erase(it);
+
             return ptrParkingSpot;
         }
         else
@@ -208,10 +209,7 @@ public:
             cout << "Invalid Vehicle!, Throw exception" << endl;
         }
 
-
-
     }
-
 
 private:
     ParkingLot()
@@ -221,22 +219,19 @@ private:
 
         // push all free small slots in stack
         // so that we can retrieve the spot in O(1)
+        // similarly for other spot types
         for(int i=1; i<=spotLimit; i++)
         {
             ParkingSpot temp(i, SpotSize::SMALL);
             mSmallSpotList.push(temp);
         }
 
-        // push all free small slots in stack
-        // so that we can retrieve the spot in O(1)
         for(int i=spotLimit + 1; i<=2*spotLimit ; i++)
         {
             ParkingSpot temp(i, SpotSize::MEDIUM);
             mMediumSpotList.push(temp);
         }
 
-        // push all free small slots in stack
-        // so that we can retrieve the spot in O(1)
         for(int i=2*spotLimit + 1; i<=3*spotLimit; i++)
         {
             ParkingSpot temp(i, SpotSize::LARGE);
@@ -245,8 +240,7 @@ private:
 
     }
 
-
-    /* create 3 list or stacks for every spot type */
+    /* create 3 lists or stacks for every spot type */
     stack<ParkingSpot> mSmallSpotList;
     stack<ParkingSpot> mMediumSpotList;
     stack<ParkingSpot> mLargeSpotList;
@@ -265,7 +259,7 @@ int main()
     MotorCycle MotorCycleObject("KA05JX0297");
 
     // Park motorcycle
-    ParkingSpot *spot1 = ParkingLot::getInstance()->placeVehicle(MotorCycleObject);
+    ParkingSpot *spot1 = ParkingLot::getInstance()->placeVehicle(&MotorCycleObject);
     cout << spot1->getSpotId() << endl;
     cout << spot1->getSpotSize() << endl;
 
@@ -273,20 +267,22 @@ int main()
     Car CarObject("DL03B7822");
 
     // Park car1
-    ParkingSpot *spot2 = ParkingLot::getInstance()->placeVehicle(CarObject);
+    ParkingSpot *spot2 = ParkingLot::getInstance()->placeVehicle(&CarObject);
     cout << spot2->getSpotId() << endl;
     cout << spot2->getSpotSize() << endl;
 
     Car CarObject2("UP04J0007");
 
     // Par car2
-    ParkingSpot *spot3 = ParkingLot::getInstance()->placeVehicle(CarObject2);
+    ParkingSpot *spot3 = ParkingLot::getInstance()->placeVehicle(&CarObject2);
     cout << spot3->getSpotId() << endl;
     cout << spot3->getSpotSize() << endl;
 
     // remove car1
-    ParkingSpot *spot4 = ParkingLot::getInstance()->removeVehicle(CarObject);
+    ParkingSpot *spot4 = ParkingLot::getInstance()->removeVehicle(&CarObject);
+    cout << "spot freed: " << endl;
     cout << spot4->getSpotId() << endl;
     cout << spot4->getSpotSize() << endl;
+
     return 0;
 }
