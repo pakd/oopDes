@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 struct Address
@@ -92,8 +94,36 @@ public:
         cout << endl << __func__ << endl;
         cout << message->getMessagePayload() << " " << message->getMessageType();
     }
+
+    void addFollower(User *user)
+    {
+        cout << endl << __func__ << endl;
+
+        mFollowers.push_back(user);
+    }
+
+    void removeFollower(User *user)
+    {
+        cout << endl << __func__ << endl;
+
+        auto position = find(mFollowers.begin(), mFollowers.end(), user);
+        if(position != mFollowers.end())
+        {
+            mFollowers.erase(position);
+        }
+    }
+
+    void sendMessage(Message  *message)
+    {
+        for (auto followers: mFollowers)
+        {
+            followers->receiveMessage(message);
+        }
+    }
+
 private:
     UserInfo mUserInfo;
+    vector<User*> mFollowers;
 
 };
 
@@ -118,15 +148,14 @@ public:
 
     MessagingService() { cout << endl << __func__ << endl; }
 
-    void sendMessage(User *fromUser, User *toUser, Message *message)
+    void sendMessage(User *fromUser, Message *message)
     {
         cout << endl << __func__ << endl;
         cout << "sending message from "  << fromUser->getUserName()
-             << " to " << toUser->getUserName() << " : "
+             << " to followers of "  << fromUser->getUserName() << " : "
              << message->getMessagePayload() << endl;
 
-        toUser->receiveMessage(message);
-
+        fromUser->sendMessage(message);
     }
 };
 
@@ -150,13 +179,29 @@ int main()
 
     User userObj2(userInfo2);
 
+    // user 3
+    UserInfo userInfo3;
+    userInfo3.userName = "bacha";
+    userInfo3.email = "d";
+    userInfo3.phoneNo = "8960684031";
+
+    User userObj3(userInfo3);
+
+    // adding followers 2 and 3 to 1
+    userObj1.addFollower(&userObj2);
+    userObj1.addFollower(&userObj3);
+
     // sample message
-    Message message("Hi, UserObj 2",  MessageType::TEXT);
+    Message message("Hi, followers",  MessageType::TEXT);
 
 
     // user 1 sending message to user 2
     MessagingService messagingServiceObj;
-    messagingServiceObj.sendMessage(&userObj1, &userObj2, &message);
+    messagingServiceObj.sendMessage(&userObj1, &message);
+
+    userObj1.removeFollower(&userObj2);
+
+    messagingServiceObj.sendMessage(&userObj1, &message);
 
     return 0;
 }
