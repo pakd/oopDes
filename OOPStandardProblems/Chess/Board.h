@@ -22,7 +22,7 @@ private:
     void resetBoard()
     {
         King kingobj(true);
-        box[0][0] = new Box(0, 0, king);
+        box[0][0] = new Box(0, 0, kingobj);
     }
     std::vector<std::vector<Box*>> box;
 };
