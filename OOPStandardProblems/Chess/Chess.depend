@@ -1,21 +1,22 @@
 # depslib dependency file v1.0
-1556617341 source:d:\journey3.0\oopdes\oopstandardproblems\chess\main.cpp
+1556653151 source:d:\journey3.0\oopdes\oopstandardproblems\chess\main.cpp
 	<iostream>
-	"Piece.h"
+	"Board.h"
+	"Player.h"
+
+1556653768 d:\journey3.0\oopdes\oopstandardproblems\chess\piece.h
+	<iostream>
 	"Box.h"
-	"Board.h"
 
-1556618342 d:\journey3.0\oopdes\oopstandardproblems\chess\piece.h
-	<iostream>
-	"Board.h"
-
-1556619324 d:\journey3.0\oopdes\oopstandardproblems\chess\board.h
+1556653278 d:\journey3.0\oopdes\oopstandardproblems\chess\board.h
 	<iostream>
 	<vector>
+	"Piece.h"
 	"Box.h"
-	"Piece.h"
 
-1556617977 d:\journey3.0\oopdes\oopstandardproblems\chess\box.h
+1556653192 d:\journey3.0\oopdes\oopstandardproblems\chess\box.h
 	<iostream>
-	"Piece.h"
+
+1556653229 d:\journey3.0\oopdes\oopstandardproblems\chess\player.h
+	<iostream>
 
