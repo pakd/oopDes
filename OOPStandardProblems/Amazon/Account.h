@@ -1,12 +1,14 @@
 #include<iostream>
 using namespace std;
 
-struct Address {
-    String streetAddress;
-    String city;
-    String state;
-    String zipCode;
-    String country;
+class Address {
+public:
+private:
+    string streetAddress;
+    string city;
+    string state;
+    string zipCode;
+    string country;
 };
 
 class Account
