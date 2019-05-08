@@ -1,16 +1,6 @@
 #include<iostream>
 using namespace std;
 
-class Item
-{
-public:
-    bool updateQuantity(int quantity) {}
-private:
-    string mProductId;
-    int mQuantity;
-    double mPrice;
-};
-
 
 class ShoppingCart
 {

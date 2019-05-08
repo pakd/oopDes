@@ -16,6 +16,7 @@ public:
     bool addCard(Card) {}
     bool addNetBankingMethod(NetBanking) {}
     bool resetPassword() {}
+    ShoppingCart* getShoppingCart() {}
 private:
     string mUsername;
     string mPassword; // hash
@@ -26,6 +27,9 @@ private:
 
     list<Card> mCards;
     list<NetBanking> mNetBankings;
+
+    ShoppingCart* mShoppingCart;
+
     bool isPrimeMember;
     int mAmazonPayBalance;
     int mBalance
