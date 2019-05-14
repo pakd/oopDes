@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1557859265 source:d:\journey3.0\oopdes\oopstandardproblems\cabbooking\main.cpp
+	<iostream>
+	"User.h"
+
+1557862918 d:\journey3.0\oopdes\oopstandardproblems\cabbooking\user.h
+	<iostream>
+	<list>
+	"Cab.h"
+
+1557859840 d:\journey3.0\oopdes\oopstandardproblems\cabbooking\cab.h
+	<iostream>
+	"Ride.h"
+
+1557860302 d:\journey3.0\oopdes\oopstandardproblems\cabbooking\ride.h
+	<iostream>
+	"User.h"
+
