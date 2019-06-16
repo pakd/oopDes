@@ -1,1 +1,22 @@
 # oopDes
+
+1. ParkingLot
+2. ChatMessenger
+3. Twitter
+4. SnakeNLadder
+5. ElevatorSystemDesign
+6. Chess
+7. Amazon
+8. ATM
+9. CabBooking
+10. SnakeNFodd
+11. MineSweeper
+12. Swiggy
+13. BookMyShow
+14. CricInfo
+15. JiraSystem
+16. Practo
+17. BlackJack
+18. MakeMyTrip
+19. Oyo
+20. ZoomCar(CarRental)
