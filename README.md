@@ -9,7 +9,7 @@
 7. Amazon
 8. ATM
 9. CabBooking
-10. SnakeNFodd
+[10. SnakeNFood](https://www.geeksforgeeks.org/design-snake-game/)
 11. MineSweeper
 12. Swiggy
 13. BookMyShow
