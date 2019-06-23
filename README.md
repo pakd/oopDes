@@ -9,8 +9,8 @@
 7. Amazon
 8. ATM
 9. CabBooking
-[10. SnakeNFood](https://www.geeksforgeeks.org/design-snake-game/)
-11. MineSweeper
+10. [SnakeNFood](https://www.geeksforgeeks.org/design-snake-game/)
+11. [MineSweeper](https://www.geeksforgeeks.org/cpp-implementation-minesweeper-game/)
 12. Swiggy
 13. BookMyShow
 14. CricInfo
